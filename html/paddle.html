@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- LOTTO
+ SCRIPT laget ifbm. åresalg i Eidsvåg meninghet.
+ Denne koden kan fritt modifiseres og distribueres slik en 
+ måtte ønske. 
+ Kjell Kvinge, 2008, 2009, 2010, 2011, -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title>Bazar</title>
+
+<STYLE type="text/css">
+
+/**
+ *  Style by Thomas Hamer. Thank you
+ */
+
+body  {
+	background: #000000;
+	font-family: Arial Black;
+	font-size: 1em;
+	color: #f2f2f2;
+}
+
+.win {
+        background: #FFF;
+        color: #000;
+
+}
+
+#big {
+	font-size: 20em;
+	font-weight: bold;
+	text-align: center;
+	colo_r: #f2f2f2;
+	float: right;
+	margin: 0;
+	padding: 0;
+	width: 90%;
+}
+#count{
+	position:absolute;
+	left:1160px;
+	}
+
+#list {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+   
+#list li {
+	font-size: 2em;
+	width: 3em;
+	text-align: center;
+	padding: 0.2em;
+	margin: 0.2em;
+	color: #ff8899;
+	background: #aa0000;
+	border: 1px solid #cc0000;
+	-moz-border-radius: 1em;
+	text-shadow: 1px 1px 1px #ffffff;
+}
+
+#list li:first-child{
+        color: white;
+	}
+
+ul, li {
+	list-style: none;
+	text-indent: 0;
+}
+
+
+</style>
+</head>
+<body id="b">
+
+<!-- Alle JS-ting her..  -->
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Hide script from old browsers
+
+
+/* - set random text
+ * - main method.
+ */
+function setText(){
+ document.getElementById('b').className = "";
+ var big = document.getElementById("big");
+ big.className="";
+
+/* set future randum numbers */
+for (var x = 0; x <= 24; x++)
+   {
+
+   setTimeout("setTmpNum( )", x * 100 );
+
+ }
+ 
+/* slow numberchange before winner */
+setTimeout("setTmpNum( )", 2600 );
+
+/* wee have a winner.. woohoo */
+setTimeout("setTmpNumWinner( )", 3001 );
+
+}
+
+/**
+ * Pick a random number, and set value in div (#big)
+ */
+function setTmpNum( ){
+  /**** - number from and to  ***/
+  var from = 0;
+  var to   = 5000;
+  var tmpnum = Math.round(Math.random() * (to-from) ) + from;;
+  big=document.getElementById( "big" );
+  big.innerHTML=tmpnum;
+  return tmpnum;
+}
+
+/**
+ * Pick the winnernumber, and opdate
+ * the list containing winnernumbers
+ */
+function setTmpNumWinner(){
+  var tmpnum = setTmpNum();
+  
+  var big = document.getElementById('big');
+  document.getElementById('b').className = "win";
+  document.getElementById('big').className = "win";
+  //big.
+
+  var list = document.getElementById('list');
+  list.innerHTML = "<li>" + tmpnum + "</li>" + list.innerHTML;
+  
+  var count = document.getElementById('count');
+  if (  !(parseFloat(count.innerHTML) ) ){
+	count.innerHTML=0;
+ }
+  count.innerHTML =  parseFloat(count.innerHTML) + 1;
+
+}
+
+// End hiding the script -->
+</SCRIPT>
+
+<!-- <button onclick="setText()">Trekk</button> -->
+
+<div id="big" onclick="setText()">Trekk</div>
+
+<div id="count">
+</div>
+<div id="listboks">
+<ul id="list"></ul>
+</div>
+
+<!--
+<div id="settings">
+     <form name="settings" onsubmit="return submitSettings()">
+     <input name="max" value="2000">
+     <button>push</button>
+     </form>
+</div>
+-->
+
+</body>
