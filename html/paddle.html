@@ -24,6 +24,10 @@ Version 0.1 - Committed a copy found in my email inbox.
  *  Style by Thomas Hamer. Thank you
  */
 
+#settings {
+	float: right;
+	border: 2px solid red;
+}
 body  {
 	background: #000000;
 	font-family: Arial Black;
@@ -41,7 +45,7 @@ body  {
 	font-size: 20em;
 	font-weight: bold;
 	text-align: center;
-	colo_r: #f2f2f2;
+	/* color: #f2f2f2; */
 	float: right;
 	margin: 0;
 	padding: 0;
@@ -82,15 +86,45 @@ ul, li {
 	text-indent: 0;
 }
 
+.hidden{
+	display: none;
+}
 
 </style>
 </head>
-<body id="b">
+<body id="b" onload="load()">
 
 <!-- Alle JS-ting her..  -->
 <SCRIPT LANGUAGE="JavaScript">
 <!-- Hide script from old browsers
+// default settings
+var from =5;
+var to = 10;
+	
+function load(){
+	if (getUrlVars()["from"]  >= 0){
+		from = getUrlVars()["from"];
+	}
+	
+	if (getUrlVars()["to"]  > 0){
+		to = getUrlVars()["to"];
+	}
 
+	document.getElementById('settings_from').value =  from;
+	document.getElementById('settings_to').value = to;
+	
+	if (getUrlVars()["hide"]){
+		hideSettings();
+	}
+}
+
+function getUrlVars() {
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		vars[key] = parseInt(value);
+	});
+	return vars;
+}
 
 /* - set random text
  * - main method.
@@ -120,10 +154,7 @@ setTimeout("setTmpNumWinner( )", 3001 );
  * Pick a random number, and set value in div (#big)
  */
 function setTmpNum( ){
-  /**** - number from and to  ***/
-  var from = 0;
-  var to   = 5000;
-  var tmpnum = Math.round(Math.random() * (to-from) ) + from;;
+  var tmpnum = (Math.round(Math.random() * (to-from) ) + from);;
   big=document.getElementById( "big" );
   big.innerHTML=tmpnum;
   return tmpnum;
@@ -152,11 +183,18 @@ function setTmpNumWinner(){
 
 }
 
+function hideSettings(){
+	var settings = document.getElementById('settings');
+	settings.className = "hidden";
+}
 // End hiding the script -->
 </SCRIPT>
 
 <!-- <button onclick="setText()">Trekk</button> -->
 
+<SCRIPT>
+
+</SCRIPT>
 <div id="big" onclick="setText()">Trekk</div>
 
 <div id="count">
@@ -165,13 +203,16 @@ function setTmpNumWinner(){
 <ul id="list"></ul>
 </div>
 
-<!--
 <div id="settings">
      <form name="settings" onsubmit="return submitSettings()">
-     <input name="max" value="2000">
-     <button>push</button>
-     </form>
+     <ul>
+	<li>Fra:<input name="from" value="" id="settings_from"></li>
+	<li>Til:<input name="to" value="" id="settings_to"></li>
+     </ul>
+     <button>lagre</button>
+     <button onclick="hideSettings(); return false;">skjul</button>
+  </form>
+  <p>Trykk F11 for å vise i fullskjerm modus</p>
 </div>
--->
 
 </body>
