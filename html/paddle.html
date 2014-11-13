@@ -116,6 +116,8 @@ function load(){
 
 	document.getElementById('settings_from').value =  from;
 	document.getElementById('settings_to').value = to;
+	document.getElementById('settings_from_display').innerHTML =  from;
+	document.getElementById('settings_to_display').innerHTML = to;
 	
 	if (getUrlVars()["hide"]){
 		hideSettings();
@@ -179,11 +181,11 @@ function setTmpNumWinner(){
   var list = document.getElementById('list');
   list.innerHTML = "<li>" + tmpnum + "</li>" + list.innerHTML;
   
-  var count = document.getElementById('count');
-  if (  !(parseFloat(count.innerHTML) ) ){
+  var count = document.getElementById('c');
+  if (  !(parseFloat(c.innerHTML) ) ){
 	count.innerHTML=0;
  }
-  count.innerHTML =  parseFloat(count.innerHTML) + 1;
+  c.innerHTML =  parseFloat(c.innerHTML) + 1;
 
 }
 
@@ -201,10 +203,12 @@ function hideSettings(){
 </SCRIPT>
 <div id="big" onclick="setText()">Trekk</div>
 
-<div id="count">
+<div id="count">Trekning nummer
+  <span id="c"></span>. Trekker tall mellom <span id="settings_from_display"></span> og <span id="settings_to_display"></span>
+<a id="show_settings" href="#" onclick="showSettings(); return false;">endre</a>
 </div>
 <div id="listboks">
-<ul id="list"></ul>
+  <ul id="list"></ul>
 </div>
 
 <div id="settings">
