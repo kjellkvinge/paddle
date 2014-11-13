@@ -190,12 +190,7 @@ function setTmpNumWinner(){
 
 }
 
-function hideSettings(){
-	var settings = document.getElementById('settings');
-	settings.className = "hidden";
-}
-
-function showSettings(){
+function toggleSettings(){
     var settings = document.getElementById('settings');
     if (settings.className == "hidden"){
 	settings.className = "";
@@ -215,20 +210,20 @@ function showSettings(){
 
 <div id="count">Trekning nummer
   <span id="c"></span>. Trekker tall mellom <span id="settings_from_display"></span> og <span id="settings_to_display"></span>
-<a id="show_settings" href="#" onclick="showSettings(); return false;">endre</a>
+<a id="show_settings" href="#" onclick="toggleSettings(); return false;">endre</a>
 </div>
 <div id="listboks">
   <ul id="list"></ul>
 </div>
 
-<div id="settings">
+<div id="settings" class="hidden">
      <form name="settings" onsubmit="return submitSettings()">
      <ul>
 	<li>Fra:<input name="from" value="" id="settings_from"></li>
 	<li>Til:<input name="to" value="" id="settings_to"></li>
      </ul>
      <button>lagre</button>
-     <button onclick="hideSettings(); return false;">skjul</button>
+     <button onclick="toggleSettings(); return false;">skjul</button>
   </form>
   <p>Trykk F11 for å vise i fullskjerm modus</p>
 </div>
