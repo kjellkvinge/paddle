@@ -193,6 +193,15 @@ function hideSettings(){
 	var settings = document.getElementById('settings');
 	settings.className = "hidden";
 }
+
+function showSettings(){
+    var settings = document.getElementById('settings');
+    if (settings.className == "hidden"){
+	settings.className = "";
+    }else{
+	settings.className = "hidden";
+    }
+}
 // End hiding the script -->
 </SCRIPT>
 
