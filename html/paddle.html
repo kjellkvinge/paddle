@@ -10,6 +10,7 @@
 
 Version 0.1 - Committed a copy found in my email inbox.
 Version 0.2 - Add user settings
+version 0.3 - minor fixes
 
 http://kjellkvinge.github.io/paddle/
 
@@ -29,8 +30,9 @@ http://kjellkvinge.github.io/paddle/
  */
 
 #settings {
-	float: right;
-	border: 2px solid red;
+    float: right;
+    border: 2px solid gray;
+    padding: 2px;
 }
 body  {
 	background: #000000;
@@ -57,7 +59,7 @@ body  {
 }
 #count{
 	position:absolute;
-	left:1160px;
+	left:1060px;
 	}
 
 #list {
@@ -102,8 +104,8 @@ ul, li {
 <SCRIPT LANGUAGE="JavaScript">
 <!-- Hide script from old browsers
 // default settings
-var from =5;
-var to = 10;
+var from =0;
+var to = 4000;
 	
 function load(){
 	if (getUrlVars()["from"]  >= 0){
@@ -116,6 +118,8 @@ function load(){
 
 	document.getElementById('settings_from').value =  from;
 	document.getElementById('settings_to').value = to;
+	document.getElementById('settings_from_display').innerHTML =  from;
+	document.getElementById('settings_to_display').innerHTML = to;
 	
 	if (getUrlVars()["hide"]){
 		hideSettings();
@@ -179,17 +183,21 @@ function setTmpNumWinner(){
   var list = document.getElementById('list');
   list.innerHTML = "<li>" + tmpnum + "</li>" + list.innerHTML;
   
-  var count = document.getElementById('count');
-  if (  !(parseFloat(count.innerHTML) ) ){
+  var count = document.getElementById('c');
+  if (  !(parseFloat(c.innerHTML) ) ){
 	count.innerHTML=0;
  }
-  count.innerHTML =  parseFloat(count.innerHTML) + 1;
+  c.innerHTML =  parseFloat(c.innerHTML) + 1;
 
 }
 
-function hideSettings(){
-	var settings = document.getElementById('settings');
+function toggleSettings(){
+    var settings = document.getElementById('settings');
+    if (settings.className == "hidden"){
+	settings.className = "";
+    }else{
 	settings.className = "hidden";
+    }
 }
 // End hiding the script -->
 </SCRIPT>
@@ -201,22 +209,24 @@ function hideSettings(){
 </SCRIPT>
 <div id="big" onclick="setText()">Trekk</div>
 
-<div id="count">
+<div id="count">Trekning nummer
+  <span id="c"></span>. Trekker tall mellom <span id="settings_from_display"></span> og <span id="settings_to_display"></span>
+<a id="show_settings" href="#" onclick="toggleSettings(); return false;">endre</a>
 </div>
 <div id="listboks">
-<ul id="list"></ul>
+  <ul id="list"></ul>
 </div>
 
-<div id="settings">
+<div id="settings" class="hidden">
      <form name="settings" onsubmit="return submitSettings()">
      <ul>
 	<li>Fra:<input name="from" value="" id="settings_from"></li>
 	<li>Til:<input name="to" value="" id="settings_to"></li>
      </ul>
      <button>lagre</button>
-     <button onclick="hideSettings(); return false;">skjul</button>
+     <button onclick="toggleSettings(); return false;">skjul</button>
   </form>
-  <p>Trykk F11 for å vise i fullskjerm modus</p>
+  <p>Trykk F11 for &aring; vise i fullskjerm modus</p>
 </div>
 
 </body>
